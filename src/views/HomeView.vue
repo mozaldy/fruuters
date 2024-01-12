@@ -7,31 +7,28 @@
     />
     <main class="container mt-5">
       <ListItem
-        title="Buah Naga (Dragon Fruit)"
+        v-for="(product, index) in discountedProducts"
+        :key="product.id"
+        :product_id="product.id"
+        :title="product.title"
+        :img_url="product.img_url"
+        :index="index"
+        :price="product.price"
+        :description="product.description"
         :limited="true"
-        img_url="https://ecs7.tokopedia.net/img/cache/700/VqbcmM/2020/7/4/c886351f-79e4-4e51-aee9-9016ffa30c18.jpg"
-        :index="0"
+        :discount="product.discount"
       />
       <h1 class="display-5 pt-5 m-5 fw-bold fst-italic">Today's pick</h1>
       <ListItem
-        title="Mangga Arumanis (Arumanis Mangoes)"
-        img_url="https://s2.bukalapak.com/img/2172597621/w-1000/Tanaman_Mangga_Arumanis.jpg"
-        :index="0"
-      />
-      <ListItem
-        title="Durian Montong"
-        img_url="https://www.gooddurian.id/images/product/20221012_101644_phpn4y6mv_resized.jpg"
-        :index="1"
-      />
-      <ListItem
-        title="Mangga Arumanis (Arumanis Mangoes)"
-        img_url="https://s2.bukalapak.com/img/2172597621/w-1000/Tanaman_Mangga_Arumanis.jpg"
-        :index="2"
-      />
-      <ListItem
-        title="Durian Montong"
-        img_url="https://www.gooddurian.id/images/product/20221012_101644_phpn4y6mv_resized.jpg"
-        :index="3"
+        v-for="(product, index) in products"
+        :key="product.id"
+        :product_id="product.id"
+        :title="product.title"
+        :img_url="product.img_url"
+        :index="index"
+        :price="product.price"
+        :description="product.description"
+        :discount="product.discount"
       />
       <div class="w-100 text-center">
         <button class="btn-more rounded-pill text-white">
@@ -43,14 +40,26 @@
 </template>
 
 <script>
-import TheWelcome from '../components/TheWelcome.vue'
-import ListItem from '../components/ListItem.vue'
 import Hero from '../components/Hero.vue'
+import ListItem from '../components/ListItem.vue'
+import { useCollection } from 'vuefire'
+import { collection, query, where } from 'firebase/firestore'
+import { db } from '../firebase'
 
 export default {
   components: {
     ListItem,
     Hero
+  },
+  data() {
+    return {
+      products: useCollection(collection(db, 'products'))
+    }
+  },
+  computed: {
+    discountedProducts() {
+      return this.products.filter((product) => product.discount !== 0)
+    }
   }
 }
 </script>

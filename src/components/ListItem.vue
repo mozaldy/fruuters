@@ -17,10 +17,10 @@
       </h1>
       <h3>{{ title }}</h3>
       <p>
-        Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur
-        cupidatat.
+        {{ description }}
       </p>
-      <h1>$ 2.00/kg</h1>
+      <h1 v-if="discount != 1">$ {{ (price - price * (discount / 100)).toFixed(2) }}/kg</h1>
+
       <div class="d-flex btn-container">
         <RouterLink to="/product" class="me-3 text-white text-decoration-none">
           <button type="button" class="btn btn-primary rounded-pill rounded-5 px-3 border-0">
@@ -37,7 +37,11 @@
             Buy Now
           </button></RouterLink
         >
-        <RouterLink v-else to="/product" class="text-white text-decoration-none">
+        <RouterLink
+          v-else
+          :to="{ name: 'product', params: { productId: product_id } }"
+          class="text-white text-decoration-none"
+        >
           <button type="button" class="btn btn-primary rounded-pill rounded-5 px-3 border-0">
             Learn more
           </button>
@@ -48,13 +52,27 @@
 </template>
 
 <script>
+import { RouterLink } from 'vue-router'
 export default {
+  components: {
+    RouterLink
+  },
   props: {
     title: String,
     img_url: String,
-    limited: Boolean,
+    description: String,
+    discount: {
+      type: Number,
+      default: 1
+    },
+    price: Number,
+    limited: {
+      type: Boolean,
+      default: false
+    },
     index: Number,
-    buy_now: Boolean
+    buy_now: Boolean,
+    product_id: String
   }
 }
 </script>

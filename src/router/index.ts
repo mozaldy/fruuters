@@ -24,7 +24,7 @@ const router = createRouter({
       component: AccountView
     },
     {
-      path: '/product',
+      path: '/product/:productId',
       name: 'product',
       component: ProductView
     },

@@ -6,7 +6,7 @@
         <h1 class="text-end text-white display-5 text-uppercase fw-bold fst-italic">
           {{ text2 }}
         </h1>
-        <h1 class="text-white text-uppercase">{{ price }}</h1>
+        <h1 v-if="price" class="text-white text-uppercase">$ {{ price }}.00/kg</h1>
       </div>
       <div class="col-5 z-top">
         <img :src="img_url" alt="" class="w-100 rounded rounded-5" />
