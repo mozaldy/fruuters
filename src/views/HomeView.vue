@@ -17,6 +17,9 @@
         :description="product.description"
         :limited="true"
         :discount="product.discount"
+        :produced_in="product.produced_in"
+        :product_stock="product.product_stock"
+        :production_capacity="product.production_capacity"
       />
       <h1 class="display-5 pt-5 m-5 fw-bold fst-italic">Today's pick</h1>
       <ListItem
@@ -29,11 +32,12 @@
         :price="product.price"
         :description="product.description"
         :discount="product.discount"
+        :produced_in="product.produced_in"
+        :product_stock="product.product_stock"
+        :production_capacity="product.production_capacity"
       />
       <div class="w-100 text-center">
-        <button class="btn-more rounded-pill text-white">
-          <RouterLink to="/" class="text-decoration-none text-white">See More</RouterLink>
-        </button>
+        <RouterLink to="/" class="btn btn-nav btn-lg"> See More </RouterLink>
       </div>
     </main>
   </div>

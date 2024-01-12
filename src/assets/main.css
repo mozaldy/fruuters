@@ -3,34 +3,36 @@
   background: linear-gradient(90deg, rgba(255, 53, 49, 1) 0%, rgba(246, 149, 80, 1) 100%);
 }
 
-button {
-  transition: 0.3s ease;
-}
-button:hover {
-  transform: scale(1.05);
-}
-
 .btn {
-  width: 150px;
-  height: 50px;
   font-size: 18px !important;
+  transition: 0.3s ease !important;
   font-weight: 600 !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(206, 109, 40, 1) !important;
+}
+.btn:hover {
+  transform: scale(1.05) !important;
 }
 .btn-primary {
   background: rgba(255, 53, 49, 1) !important;
-  transition: 0.3s ease !important;
+}
+
+.btn-nav {
+  color: rgba(255, 53, 49, 1) !important;
+  border: 2px solid rgba(255, 53, 49, 1) !important;
+  border-radius: 5px !important;
+}
+
+.btn-nav:hover {
+  color: white !important;
+  border: 2px solid rgba(255, 53, 49, 0.2) !important;
+  background: rgba(255, 53, 49, 0.8) !important;
 }
 .btn-secondary {
   background: rgba(246, 149, 80, 1) !important;
 }
 .btn-primary:hover {
   background: rgba(246, 149, 80, 1) !important;
-}
-.btn-more {
-  background-color: #ff914c;
-  font-size: 36px;
-  width: 100%;
-  border: none;
 }
 
 img {

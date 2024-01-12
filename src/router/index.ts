@@ -4,6 +4,7 @@ import AccountView from '../views/AccountView.vue'
 import ProductView from '../views/ProductView.vue'
 import ContactView from '../views/ContactView.vue'
 import CategoriesView from '../views/CategoriesView.vue'
+import CheckoutView from '../views/CheckoutView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,6 +38,11 @@ const router = createRouter({
       path: '/categories',
       name: 'categories',
       component: CategoriesView
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      component: CheckoutView
     }
   ],
   scrollBehavior(to, from, savedPosition) {

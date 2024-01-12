@@ -19,32 +19,29 @@
       <p>
         {{ description }}
       </p>
+      <ul>
+        <li>
+          Produced in: <span class="fw-bold">{{ produced_in }}</span>
+        </li>
+        <li>
+          Production capacity: <span class="fw-bold">{{ production_capacity }}</span> tons/month
+        </li>
+        <li>
+          Stock: <span class="fw-bold">{{ product_stock }}</span> tons
+        </li>
+      </ul>
       <h1 v-if="discount != 1">$ {{ (price - price * (discount / 100)).toFixed(2) }}/kg</h1>
 
       <div class="d-flex btn-container">
-        <RouterLink to="/product" class="me-3 text-white text-decoration-none">
-          <button type="button" class="btn btn-primary rounded-pill rounded-5 px-3 border-0">
-            Add to Cart
-          </button>
-        </RouterLink>
+        <RouterLink to="/checkout" class="btn btn-primary me-3"> Add to Cart </RouterLink>
 
-        <RouterLink v-if="buy_now" to="/product" class="text-white text-decoration-none">
-          <button
-            v-if="buy_now"
-            type="button"
-            class="btn btn-secondary rounded-pill rounded-5 px-3 border-0"
-          >
-            Buy Now
-          </button></RouterLink
-        >
+        <RouterLink v-if="buy_now" to="/checkout" class="btn btn-secondary"> Buy Now </RouterLink>
         <RouterLink
           v-else
           :to="{ name: 'product', params: { productId: product_id } }"
-          class="text-white text-decoration-none"
+          class="btn btn-primary"
         >
-          <button type="button" class="btn btn-primary rounded-pill rounded-5 px-3 border-0">
-            Learn more
-          </button>
+          Learn more
         </RouterLink>
       </div>
     </div>
@@ -72,7 +69,19 @@ export default {
     },
     index: Number,
     buy_now: Boolean,
-    product_id: String
+    product_id: String,
+    produced_in: {
+      type: String,
+      default: 'Indonesia'
+    },
+    production_capacity: {
+      type: Number,
+      default: 0
+    },
+    product_stock: {
+      type: Number,
+      default: 0
+    }
   }
 }
 </script>

@@ -17,11 +17,12 @@
         :description="product.description"
         :discount="product.discount"
         buy_now="true"
+        :produced_in="product.produced_in"
+        :product_stock="product.product_stock"
+        :production_capacity="product.production_capacity"
       />
-      <div class="w-25 text-center">
-        <button class="btn-more rounded-pill text-white">
-          <RouterLink to="/" class="text-decoration-none text-white">See More</RouterLink>
-        </button>
+      <div class="text-center">
+        <RouterLink to="/" class="btn btn-nav">Go Back</RouterLink>
       </div>
     </main>
   </div>
