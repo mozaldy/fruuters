@@ -183,8 +183,8 @@
             </div>
           </div>
           <hr class="mb-4" />
-          <button class="btn-fruuters text-white border-0 py-2 px-5 rounded-3" type="submit">
-            Save Information
+          <button type="button" class="btn btn-primary rounded-pill rounded-5 px-3 border-0">
+            Save
           </button>
         </form>
       </div>

@@ -57,11 +57,10 @@
             </div>
             <div class="row">
               <div class="col-md-12">
-                <input
-                  type="submit"
-                  value="Send Message"
-                  class="mt-5 btn-fruuters rounded-5 border-0 text-white py-2 px-4"
-                />
+                <button type="button" class="btn btn-primary rounded-pill rounded-5 px-3 border-0">
+                  Send Message
+                </button>
+
                 <span class="submitting"></span>
               </div>
             </div>

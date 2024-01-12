@@ -10,15 +10,21 @@ button:hover {
   transform: scale(1.05);
 }
 
-.btn-fruuters {
-  background: rgba(255, 53, 49, 1);
-  transition: 0.3s ease;
+.btn {
+  width: 150px;
+  height: 50px;
+  font-size: 18px !important;
+  font-weight: 600 !important;
 }
-.btn-fruuters-2 {
-  background: rgba(246, 149, 80, 1);
+.btn-primary {
+  background: rgba(255, 53, 49, 1) !important;
+  transition: 0.3s ease !important;
 }
-.btn-fruuters:hover {
-  background: rgba(246, 149, 80, 1);
+.btn-secondary {
+  background: rgba(246, 149, 80, 1) !important;
+}
+.btn-primary:hover {
+  background: rgba(246, 149, 80, 1) !important;
 }
 .btn-more {
   background-color: #ff914c;

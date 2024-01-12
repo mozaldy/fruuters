@@ -1,9 +1,17 @@
 <template>
-  <div :class="{ 'd-flex': true, 'mb-5': true, 'flex-row-reverse': index % 2 !== 0 }">
-    <div class="left col-4">
+  <div
+    :class="{
+      'd-flex': true,
+      'flex-wrap': true,
+      'mb-5': true,
+      'justify-content-evenly': true,
+      'flex-row-reverse': index % 2 !== 0
+    }"
+  >
+    <div class="left col-sm-4">
       <img :src="img_url" alt="" class="w-100 rounded rounded-5" />
     </div>
-    <div class="right col-6 mx-4 d-flex flex-column justify-content-evenly">
+    <div class="right col-sm-6 d-flex flex-column justify-content-evenly">
       <h1 class="text-uppercase display-5 fw-bold fst-italic" v-if="limited">
         today's limited offer
       </h1>
@@ -13,26 +21,27 @@
         cupidatat.
       </p>
       <h1>$ 2.00/kg</h1>
-      <div class="d-flex col-6 justify-content-between">
-        <button type="button" class="btn-fruuters rounded-pill p-3 border-0">
-          <h5 class="mb-0 text-white">Add to cart</h5>
-        </button>
-        <button
-          v-if="buy_now"
-          type="button"
-          class="btn-fruuters-2 rounded-pill rounded-5 p-3 border-0"
+      <div class="d-flex btn-container">
+        <RouterLink to="/product" class="me-3 text-white text-decoration-none">
+          <button type="button" class="btn btn-primary rounded-pill rounded-5 px-3 border-0">
+            Add to Cart
+          </button>
+        </RouterLink>
+
+        <RouterLink v-if="buy_now" to="/product" class="text-white text-decoration-none">
+          <button
+            v-if="buy_now"
+            type="button"
+            class="btn btn-secondary rounded-pill rounded-5 px-3 border-0"
+          >
+            Buy Now
+          </button></RouterLink
         >
-          <h5 class="mb-0 text-white">
-            <RouterLink to="/product" class="text-white text-decoration-none">Buy Now</RouterLink>
-          </h5>
-        </button>
-        <button v-else type="button" class="btn-fruuters rounded-pill rounded-5 p-3 border-0">
-          <h5 class="mb-0 text-white">
-            <RouterLink to="/product" class="text-white text-decoration-none"
-              >Learn more</RouterLink
-            >
-          </h5>
-        </button>
+        <RouterLink v-else to="/product" class="text-white text-decoration-none">
+          <button type="button" class="btn btn-primary rounded-pill rounded-5 px-3 border-0">
+            Learn more
+          </button>
+        </RouterLink>
       </div>
     </div>
   </div>
@@ -49,3 +58,18 @@ export default {
   }
 }
 </script>
+<style scoped>
+@media only screen and (max-width: 576px) {
+  .left {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .right {
+    margin: auto;
+    width: 80%;
+  }
+  img {
+    width: 50% !important;
+  }
+}
+</style>
