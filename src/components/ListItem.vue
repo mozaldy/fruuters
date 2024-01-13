@@ -9,36 +9,41 @@
     }"
   >
     <div class="left col-sm-4">
-      <img :src="img_url" alt="" class="w-100 rounded rounded-5" />
+      <img :src="productData.img_url" alt="" class="w-100 rounded rounded-5" />
     </div>
     <div class="right col-sm-6 d-flex flex-column justify-content-evenly">
-      <h1 class="text-uppercase display-5 fw-bold fst-italic" v-if="limited">
+      <h1 class="text-uppercase display-5 fw-bold fst-italic" v-if="productData.discount">
         today's limited offer
       </h1>
-      <h3>{{ title }}</h3>
+      <h3>{{ productData.title }}</h3>
       <p>
-        {{ description }}
+        {{ productData.description }}
       </p>
       <ul>
         <li>
-          Produced in: <span class="fw-bold">{{ produced_in }}</span>
+          Produced in: <span class="fw-bold">{{ productData.produced_in }}</span>
         </li>
         <li>
-          Production capacity: <span class="fw-bold">{{ production_capacity }}</span> tons/month
+          Production capacity:
+          <span class="fw-bold">{{ productData.production_capacity }}</span> tons/month
         </li>
         <li>
-          Stock: <span class="fw-bold">{{ product_stock }}</span> tons
+          Stock: <span class="fw-bold">{{ productData.product_stock }}</span> tons
         </li>
       </ul>
-      <h1 v-if="discount != 1">$ {{ (price - price * (discount / 100)).toFixed(2) }}/kg</h1>
+      <h1>
+        <del v-if="productData.discount > 0">$ {{ productData.price.toFixed(2) }}/kg</del>
+        $ {{ (productData.price - productData.price * (productData.discount / 100)).toFixed(2) }}/kg
+      </h1>
 
       <div class="d-flex btn-container">
-        <RouterLink to="/checkout" class="btn btn-primary me-3"> Add to Cart </RouterLink>
+        <button @click="showModal" class="btn btn-primary me-3">Add to Cart</button>
+        <AddCartModal v-if="showModalFlag" @close="hideModal" :productData="productData" />
 
-        <RouterLink v-if="buy_now" to="/checkout" class="btn btn-secondary"> Buy Now </RouterLink>
+        <RouterLink v-if="detail" to="/checkout" class="btn btn-secondary"> Buy Now </RouterLink>
         <RouterLink
           v-else
-          :to="{ name: 'product', params: { productId: product_id } }"
+          :to="{ name: 'product', params: { productId: productData.id } }"
           class="btn btn-primary"
         >
           Learn more
@@ -50,37 +55,31 @@
 
 <script>
 import { RouterLink } from 'vue-router'
+import AddCartModal from './AddCartModal.vue'
 export default {
   components: {
-    RouterLink
+    RouterLink,
+    AddCartModal
   },
   props: {
-    title: String,
-    img_url: String,
-    description: String,
-    discount: {
-      type: Number,
-      default: 1
-    },
-    price: Number,
-    limited: {
-      type: Boolean,
-      default: false
+    productData: {
+      type: Object,
+      required: true
     },
     index: Number,
-    buy_now: Boolean,
-    product_id: String,
-    produced_in: {
-      type: String,
-      default: 'Indonesia'
+    detail: Boolean
+  },
+  data() {
+    return {
+      showModalFlag: false
+    }
+  },
+  methods: {
+    showModal() {
+      this.showModalFlag = true
     },
-    production_capacity: {
-      type: Number,
-      default: 0
-    },
-    product_stock: {
-      type: Number,
-      default: 0
+    hideModal() {
+      this.showModalFlag = false
     }
   }
 }

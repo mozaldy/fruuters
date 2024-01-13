@@ -15,4 +15,4 @@ export const firebaseApp = initializeApp({
 export const db = getFirestore(firebaseApp)
 
 // here we can export reusable database references
-export const todosRef = collection(db, 'todos')
+export const productRef = collection(db, 'products')
