@@ -10,7 +10,7 @@
         <label for="exampleFormControlSelect1" class="mb-2">Select Producer and Price:</label>
         <select class="form-control mb-2" id="producer">
           <option v-for="producer in productData.producers">
-            {{ producer.id }} - ${{ productData.price }}/kg
+            {{ producer.name }} - ${{ productData.price }}/kg
           </option>
         </select>
       </div>
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { addToCartState } from './Cart.ts'
+import { addToCartState } from './Cart.js'
 import { useRouter } from 'vue-router'
 export default {
   props: {

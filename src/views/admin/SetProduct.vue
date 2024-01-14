@@ -79,7 +79,7 @@
           v-model="selectedProducers"
           multiple
         >
-          <option v-for="producer in producers" :key="producer.id" :value="producer.id">
+          <option v-for="producer in producers" :key="producer.id" :value="producer">
             {{ producer.name }} - {{ producer.location }}
           </option>
         </select>
@@ -143,10 +143,27 @@ export default {
         this.produced_in = productData.produced_in
         this.product_stock = productData.product_stock
         this.production_capacity = productData.production_capacity
-        this.selectedProducers = productData.producers.map((producer) => producer.id)
+        this.selectedProducers = productData.producers.map((producer) => producer)
       } catch (error) {
         console.error('Error fetching product data:', error)
       }
+    },
+    async addProduct() {
+      const producersArray = this.selectedProducers
+
+      await setDoc(doc(db, 'products', this.title), {
+        title: this.title,
+        description: this.description,
+        discount: this.discount,
+        price: this.price,
+        img_url: this.img_url,
+        produced_in: this.produced_in,
+        product_stock: this.product_stock,
+        production_capacity: this.production_capacity,
+        producers: producersArray
+      })
+
+      this.success = true
     },
     async fetchProducers() {
       const producersCollection = collection(db, 'producers')
