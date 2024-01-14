@@ -37,10 +37,15 @@
       </h1>
 
       <div class="d-flex btn-container">
-        <button @click="showModal" class="btn btn-primary me-3">Add to Cart</button>
-        <AddCartModal v-if="showModalFlag" @close="hideModal" :productData="productData" />
+        <button @click="showModal(false)" class="btn btn-primary me-3">Add to Cart</button>
+        <AddCartModal
+          v-if="showModalFlag"
+          :buyNow="isBuyNow"
+          @close="hideModal"
+          :productData="productData"
+        />
 
-        <button v-if="detail" @click="showModal" class="btn btn-secondary">Buy Now</button>
+        <button v-if="detail" @click="showModal(true)" class="btn btn-secondary">Buy Now</button>
         <RouterLink
           v-else
           :to="{ name: 'product', params: { productId: productData.id } }"
@@ -75,8 +80,9 @@ export default {
     }
   },
   methods: {
-    showModal() {
+    showModal(isBuyNow) {
       this.showModalFlag = true
+      this.isBuyNow = isBuyNow
     },
     hideModal() {
       this.showModalFlag = false

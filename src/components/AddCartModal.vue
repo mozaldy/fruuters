@@ -15,7 +15,12 @@
         </select>
       </div>
       <p class="h5 mt-1">Total: ${{ productData.price * quantity }}</p>
-      <button @click="addToCart" type="submit" class="btn mt-2 btn-primary">Add to cart</button>
+      <button v-if="buyNow" @click="toCheckout" type="submit" class="btn mt-2 btn-secondary">
+        Buy Now
+      </button>
+      <button v-else @click="addToCart" type="submit" class="btn mt-2 btn-primary">
+        Add to Cart
+      </button>
       <p v-if="success">{{ productData.title }} added to cart!</p>
     </div>
   </div>
@@ -27,7 +32,8 @@ export default {
     productData: {
       type: Object,
       required: true
-    }
+    },
+    buyNow: Boolean
   },
   data() {
     return {
@@ -41,6 +47,12 @@ export default {
     },
     addToCart() {
       this.success = true
+    },
+    toCheckout() {
+      this.$emit('checkout', {
+        productData: this.productData,
+        quantity: this.quantity
+      })
     }
   }
 }

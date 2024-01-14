@@ -1,7 +1,6 @@
 <template>
   <div>
     <Hero :text1="editMode ? 'Edit Product' : 'Add Product'" />
-    {{ productId }}
     <form class="container" @submit.prevent="addProduct">
       <div class="form-group mt-3">
         <label for="title">Title:</label>
@@ -95,10 +94,9 @@
 </template>
 
 <script>
-import { doc, setDoc, collection, getDocs, updateDoc } from 'firebase/firestore'
+import { doc, setDoc, collection, getDocs, updateDoc, getDoc } from 'firebase/firestore'
 import { db } from '../../firebase.ts'
 import Hero from '../../components/Hero.vue'
-import { useDocument } from 'vuefire'
 import { useRoute } from 'vue-router'
 
 export default {
@@ -106,28 +104,6 @@ export default {
     Hero
   },
   data() {
-    const route = useRoute()
-    const productId = route.params.productId
-    if (productId) {
-      const productDocument = useDocument(doc(db, 'products', productId))
-      if (productDocument) {
-        return {
-          title: productDocument.value.title,
-          description: productDocument.value.description,
-          discount: productDocument.value.discount,
-          price: productDocument.value.price,
-          img_url: productDocument.value.img_url,
-          produced_in: productDocument.value.produced_in,
-          production_capacity: productDocument.value.production_capacity,
-          product_stock: productDocument.value.product_stock,
-          selectedProducers: [],
-          producers: [],
-          success: false,
-          editMode: false,
-          productId: null // Add a property to store the productId for editing
-        }
-      }
-    }
     return {
       title: '',
       description: '',
@@ -146,31 +122,32 @@ export default {
   },
   async created() {
     // Check if the component is in edit mode by checking the route's params
-    if (this.$route.params.productId) {
+    const route = useRoute()
+    if (route.params.productId) {
       this.editMode = true
-      this.productId = this.$route.params.productId
+      this.productId = route.params.productId
+      await this.fetchProductData()
     }
     await this.fetchProducers()
   },
   methods: {
-    async addProduct() {
-      const producersArray = this.selectedProducers.map((producerId) => ({ id: producerId }))
-
-      await setDoc(doc(db, 'products', this.title), {
-        title: this.title,
-        description: this.description,
-        discount: this.discount,
-        price: this.price,
-        img_url: this.img_url,
-        produced_in: this.produced_in,
-        product_stock: this.product_stock,
-        production_capacity: this.production_capacity,
-        producers: producersArray
-      })
-
-      this.success = true
+    async fetchProductData() {
+      try {
+        const productDoc = await getDoc(doc(db, 'products', this.productId))
+        const productData = productDoc.data()
+        this.title = productData.title
+        this.description = productData.description
+        this.discount = productData.discount
+        this.price = productData.price
+        this.img_url = productData.img_url
+        this.produced_in = productData.produced_in
+        this.product_stock = productData.product_stock
+        this.production_capacity = productData.production_capacity
+        this.selectedProducers = productData.producers.map((producer) => producer.id)
+      } catch (error) {
+        console.error('Error fetching product data:', error)
+      }
     },
-
     async fetchProducers() {
       const producersCollection = collection(db, 'producers')
       const producersSnapshot = await getDocs(producersCollection)
@@ -180,7 +157,7 @@ export default {
         name: doc.data().name,
         location: doc.data().location
       }))
-    }
+    } // ... rest of your methods
   }
 }
 </script>
