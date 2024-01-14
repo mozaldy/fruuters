@@ -40,7 +40,7 @@
         <button @click="showModal" class="btn btn-primary me-3">Add to Cart</button>
         <AddCartModal v-if="showModalFlag" @close="hideModal" :productData="productData" />
 
-        <RouterLink v-if="detail" to="/checkout" class="btn btn-secondary"> Buy Now </RouterLink>
+        <button v-if="detail" @click="showModal" class="btn btn-secondary">Buy Now</button>
         <RouterLink
           v-else
           :to="{ name: 'product', params: { productId: productData.id } }"

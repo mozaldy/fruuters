@@ -69,6 +69,17 @@ export default {
   width: 40%;
 }
 
+@media only screen and (max-width: 764px) {
+  .modal-content {
+    width: 60% !important;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .modal-content {
+    width: 80% !important;
+  }
+}
+
 .close {
   color: #aaa;
   float: right;
