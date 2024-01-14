@@ -186,6 +186,11 @@
           <button type="button" class="btn btn-primary rounded-pill rounded-5 px-3 border-0">
             Save
           </button>
+          <RouterLink to="admin/product">
+            <button type="button" class="ms-2 btn btn-primary rounded-pill rounded-5 px-3 border-0">
+              Admin
+            </button>
+          </RouterLink>
         </form>
       </div>
     </div>

@@ -2,7 +2,8 @@
   <div>
     <Hero text1="All Products" />
     <main class="container mt-5">
-      <ul class="list-group rounded-5">
+      <RouterLink to="addproduct" class="h5 text-primary mb-5"> Add Product </RouterLink>
+      <ul class="mt-5 list-group rounded-5">
         <li
           v-for="product in products"
           :key="product.id"

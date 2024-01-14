@@ -3,12 +3,12 @@
     <div class="modal-content">
       <span class="close" @click="closeModal">&times;</span>
       <div class="form-group">
-        <label for="quantity">Kuantitas:</label>
-        <input v-model="quantity" class="form-control" type="number" id="quantity" />
+        <label for="quantity" class="mb-2">Quantity:</label>
+        <input v-model="quantity" class="form-control mb-2" type="number" id="quantity" />
       </div>
       <div class="form-group">
-        <label for="exampleFormControlSelect1">Pilih petani dan harga:</label>
-        <select class="form-control" id="producer">
+        <label for="exampleFormControlSelect1" class="mb-2">Select Producer and Price:</label>
+        <select class="form-control mb-2" id="producer">
           <option v-for="producer in productData.producers">
             {{ producer.id }} - ${{ productData.price }}/kg
           </option>
@@ -21,7 +21,11 @@
       <button v-else @click="addToCart" type="submit" class="btn mt-2 btn-primary">
         Add to Cart
       </button>
+      <RouterLink v-if="!buyNow" to="/checkout" class="btn mt-2 btn-secondary">
+        Go to Checkout
+      </RouterLink>
       <p v-if="success">{{ productData.title }} added to cart!</p>
+      <RouterLink to="/" class="mt-5 text-center">Go back to Home</RouterLink>
     </div>
   </div>
 </template>
@@ -75,7 +79,7 @@ export default {
 
 .modal-content {
   background-color: #fefefe;
-  margin: 10% auto;
+  margin: 7% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 40%;
