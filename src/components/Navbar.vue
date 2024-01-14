@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar z-100 navbar-expand-lg w-100 bg-fruuters">
     <div class="container">
-      <RouterLink to="/" class="text-white h2 text-decoration-none letter nav-title"
-        >früüters.id</RouterLink
-      >
+      <RouterLink to="/" class="text-white h2 text-decoration-none letter nav-title">
+        <img src="/logo.ico" height="90px" class="rounded-pill" alt="" />
+      </RouterLink>
 
       <button
         class="navbar-toggler"

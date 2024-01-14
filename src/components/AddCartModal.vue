@@ -24,13 +24,17 @@
       <RouterLink v-if="!buyNow" to="/checkout" class="btn mt-2 btn-secondary">
         Go to Checkout
       </RouterLink>
-      <p v-if="success">{{ productData.title }} added to cart!</p>
+      <p v-if="success" class="alert alert-success mt-2" role="alert">
+        {{ quantity }} {{ productData.title }} added to cart!
+      </p>
       <RouterLink to="/" class="mt-5 text-center">Go back to Home</RouterLink>
     </div>
   </div>
 </template>
 
 <script>
+import { addToCartState } from './Cart.ts'
+import { useRouter } from 'vue-router'
 export default {
   props: {
     productData: {
@@ -50,13 +54,13 @@ export default {
       this.$emit('close')
     },
     addToCart() {
+      addToCartState(this.productData, this.quantity)
       this.success = true
     },
     toCheckout() {
-      this.$emit('checkout', {
-        productData: this.productData,
-        quantity: this.quantity
-      })
+      addToCartState(this.productData, this.quantity)
+      this.$router.push('/checkout')
+      this.success = true
     }
   }
 }

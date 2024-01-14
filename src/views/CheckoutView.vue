@@ -9,37 +9,25 @@
             <span class="badge badge-secondary badge-pill">3</span>
           </h4>
           <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <li
+              v-for="item in cartState.cartItems"
+              class="list-group-item align-items-center d-flex justify-content-between lh-condensed"
+            >
               <div>
-                <h6 class="my-0">Product name</h6>
-                <small class="text-muted">Brief description</small>
+                <h6 class="my-0">{{ item.id }}</h6>
+                <small class="text-muted">${{ item.quantity }} x {{ item.price }} pcs</small>
               </div>
-              <span class="text-muted">$12</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Second product</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$8</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Third item</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$5</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
-              </div>
-              <span class="text-success">-$5</span>
+              <span class="text-muted ms-auto me-3">${{ item.quantity * item.price }}</span>
+              <button
+                @click="removeItem(item.id)"
+                class="rounded-pill text-white bg-danger border-0"
+              >
+                X
+              </button>
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
-              <strong>$20</strong>
+              <strong>${{ calculateTotal() }}</strong>
             </li>
           </ul>
 
@@ -245,9 +233,23 @@
 </template>
 <script>
 import Hero from '../components/Hero.vue'
+import { cartState, removeFromCart } from '../components/Cart.ts'
 export default {
   components: {
     Hero
+  },
+  setup() {
+    const calculateTotal = () => {
+      return cartState.cartItems.reduce((total, item) => total + item.quantity * item.price, 0)
+    }
+    const removeItem = (itemId) => {
+      removeFromCart(itemId)
+    }
+    return {
+      cartState,
+      calculateTotal,
+      removeItem
+    }
   }
 }
 </script>
