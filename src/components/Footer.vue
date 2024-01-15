@@ -1,22 +1,35 @@
 <template>
   <div class="bg-fruuters footer">
     <div class="container">
-      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
-        <a
-          href="/"
-          class="text-white col-sm-5 d-flex align-items-center mb-3 mb-md-0 link-dark text-decoration-none"
+      <div class="container">
+        <footer
+          class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
         >
-          <img src="/logo.ico" class="rounded-pill col-3 me-5" />
-          <div class="display-5 fw-bold footer-title">früüters</div>
-        </a>
+          <p class="col-md-4 mb-0 text-white">© 2024 Früüters, Inc</p>
 
-        <ul class="col-md-2 list-style-none mb-0 list-inline justify-content-end"></ul>
-        <ul class="nav col-3 justify-content-end">
-          <a href="https://github.com/mozaldy/" class="text-decoration-none">
-            <p class="mb-0 text-white">Made by The 2DH Team</p>
+          <a
+            href="/"
+            class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+          >
+            <img src="/logo.ico" class="rounded-pill" height="90px" width="90px" alt="" />
           </a>
-        </ul>
-      </footer>
+
+          <ul class="nav col-md-4 justify-content-end">
+            <li class="nav-item text-white">
+              <RouterLink to="/" class="nav-link px-2 text-white">Home</RouterLink>
+            </li>
+            <li class="nav-item">
+              <RouterLink to="account" class="nav-link px-2 text-white">Account</RouterLink>
+            </li>
+            <li class="nav-item">
+              <RouterLink to="products" class="nav-link px-2 text-white">All products</RouterLink>
+            </li>
+            <li class="nav-item">
+              <RouterLink to="about" class="nav-link px-2 text-white">About</RouterLink>
+            </li>
+          </ul>
+        </footer>
+      </div>
     </div>
   </div>
 </template>

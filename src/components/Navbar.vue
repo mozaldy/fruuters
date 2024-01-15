@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar z-100 navbar-expand-lg w-100 bg-fruuters">
-    <div class="container">
-      <RouterLink to="/" class="text-white h2 text-decoration-none letter nav-title">
-        <img src="/logo.ico" height="90px" class="rounded-pill" alt="" />
+    <div class="container align-items-end d-flex">
+      <RouterLink to="/" class="text-white mb-1 h2 text-decoration-none letter nav-title">
+        <img src="/logo.png" height="55px" class="rounded-pill" alt="" />
       </RouterLink>
 
       <button
@@ -38,6 +38,11 @@
               >Contact</RouterLink
             >
           </li>
+          <li class="nav-item">
+            <RouterLink to="/about" active-class="fw-bold" class="nav-link text-white"
+              >About</RouterLink
+            >
+          </li>
         </ul>
       </div>
     </div>
@@ -47,5 +52,11 @@
 <style scoped>
 nav {
   z-index: 100;
+}
+img {
+  border: 1px solid transparent !important;
+}
+img:hover {
+  border: 1px solid transparent !important;
 }
 </style>

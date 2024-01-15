@@ -174,7 +174,7 @@ export default {
         name: doc.data().name,
         location: doc.data().location
       }))
-    } // ... rest of your methods
+    }
   }
 }
 </script>

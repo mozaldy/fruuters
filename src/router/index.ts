@@ -35,6 +35,11 @@ const routes = [
     component: loadView('ContactView')
   },
   {
+    path: '/about',
+    name: 'about',
+    component: loadView('AboutView')
+  },
+  {
     path: '/categories',
     name: 'categories',
     component: loadView('CategoriesView')
