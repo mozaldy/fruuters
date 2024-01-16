@@ -14,7 +14,7 @@
       <h1 class="display-5 pt-5 m-5 fw-bold fst-italic">Today's pick</h1>
       <ListItem v-for="(product, index) in products" :index="index" :productData="product" />
       <div class="w-100 text-center">
-        <RouterLink to="products" class="btn btn-nav btn-lg"> See More </RouterLink>
+        <RouterLink to="/products" class="btn btn-nav btn-lg"> See More </RouterLink>
       </div>
     </main>
   </div>

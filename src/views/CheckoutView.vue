@@ -233,7 +233,7 @@
 </template>
 <script>
 import Hero from '../components/Hero.vue'
-import { cartState, removeFromCart } from '../data/Cart.ts'
+import { cartState, removeFromCart } from '../components/Cart.ts'
 export default {
   components: {
     Hero
