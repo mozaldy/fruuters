@@ -1,0 +1,1 @@
+import{k as r}from"./index-Pg3grZ4c.js";const s=r({cartItems:[]}),i=(t,e)=>{const a={id:t.id,name:t.title,price:t.price,quantity:e};s.cartItems.push(a)},m=t=>{const e=s.cartItems.findIndex(a=>a.id===t);e!==-1&&s.cartItems.splice(e,1)};export{i as a,s as c,m as r};
