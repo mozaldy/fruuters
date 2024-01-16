@@ -1,10 +1,20 @@
 <template>
   <div>
     <Hero text1="All Products" />
-    <main class="container mt-5">
+    <div class="container mt-5">
+      <div class="mb-3">
+        <label for="categorySelect">Filter by Category:</label>
+        <select v-model="selectedCategory" @change="filterProducts" id="categorySelect">
+          <option value="">All Categories</option>
+          <option v-for="category in categories" :key="category.id" :value="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+
       <ul class="list-group rounded-5">
         <li
-          v-for="product in products"
+          v-for="product in filteredProducts"
           :key="product.id"
           class="list-group-item justify-content-evenly py-0 d-flex flex-wrap align-items-center"
         >
@@ -17,9 +27,10 @@
           >
             Learn More
           </RouterLink>
+          <!-- ... your existing product HTML -->
         </li>
       </ul>
-    </main>
+    </div>
   </div>
 </template>
 
@@ -27,6 +38,8 @@
 import Hero from '../components/Hero.vue'
 import { useCollection } from 'vuefire'
 import { productRef } from '../firebase'
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from '../firebase.ts'
 import { RouterLink } from 'vue-router'
 
 export default {
@@ -36,11 +49,45 @@ export default {
   },
   data() {
     return {
-      products: useCollection(productRef)
+      products: useCollection(productRef),
+      categories: [], // Add this property to store categories
+      selectedCategory: '' // Add this property to store the selected category filter
+    }
+  },
+  computed: {
+    filteredProducts() {
+      if (!this.selectedCategory) {
+        return this.products
+      } else {
+        return this.products.filter(
+          (product) =>
+            product.categories &&
+            product.categories.some((category) => category.name === this.selectedCategory)
+        )
+      }
+    }
+  },
+  async created() {
+    const queryCategory = this.$route.query.category
+    if (queryCategory) {
+      // Set the selected category if it exists in the query parameters
+      this.selectedCategory = queryCategory
+    }
+    await this.fetchCategories()
+  },
+  methods: {
+    async fetchCategories() {
+      const categoriesCollection = collection(db, 'product_categories')
+      const categoriesSnapshot = await getDocs(categoriesCollection)
+      this.categories = categoriesSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        name: doc.data().name
+      }))
     }
   }
 }
 </script>
+
 <style scoped>
 .list-group-item {
   transition: ease 0.5s;

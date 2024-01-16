@@ -19,13 +19,13 @@
               <RouterLink to="/" class="nav-link px-2 text-white">Home</RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink to="account" class="nav-link px-2 text-white">Account</RouterLink>
+              <RouterLink to="/categories" class="nav-link px-2 text-white">Categories</RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink to="products" class="nav-link px-2 text-white">All products</RouterLink>
+              <RouterLink to="/products" class="nav-link px-2 text-white">All products</RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink to="about" class="nav-link px-2 text-white">About</RouterLink>
+              <RouterLink to="/about" class="nav-link px-2 text-white">About</RouterLink>
             </li>
           </ul>
         </footer>

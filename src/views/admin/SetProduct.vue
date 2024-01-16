@@ -85,6 +85,21 @@
         </select>
       </div>
 
+      <div class="form-group mt-3">
+        <label for="categories">Product Categories:</label>
+        <select
+          id="categories"
+          name="categories"
+          class="form-control"
+          v-model="selectedCategories"
+          multiple
+        >
+          <option v-for="category in productCategories" :key="category.id" :value="category">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+
       <div class="alert alert-success" v-if="success">Successfully added {{ title }}</div>
       <button type="submit" class="mt-5 btn btn-primary">
         {{ editMode ? 'Update Product' : 'Add Product' }}
@@ -115,9 +130,11 @@ export default {
       product_stock: 0,
       selectedProducers: [],
       producers: [],
+      selectedCategories: [],
+      categories: [],
       success: false,
       editMode: false,
-      productId: null // Add a property to store the productId for editing
+      productId: null
     }
   },
   async created() {
@@ -128,6 +145,7 @@ export default {
       this.productId = route.params.productId
       await this.fetchProductData()
     }
+    await this.fetchProductCategories()
     await this.fetchProducers()
   },
   methods: {
@@ -144,12 +162,16 @@ export default {
         this.product_stock = productData.product_stock
         this.production_capacity = productData.production_capacity
         this.selectedProducers = productData.producers.map((producer) => producer)
+        this.selectedCategories = productData.categories.map((categoryId) => ({
+          id: categoryId
+        }))
       } catch (error) {
         console.error('Error fetching product data:', error)
       }
     },
     async addProduct() {
       const producersArray = this.selectedProducers
+      const categoriesArray = this.selectedCategories
 
       await setDoc(doc(db, 'products', this.title), {
         title: this.title,
@@ -160,7 +182,8 @@ export default {
         produced_in: this.produced_in,
         product_stock: this.product_stock,
         production_capacity: this.production_capacity,
-        producers: producersArray
+        producers: producersArray,
+        categories: categoriesArray
       })
 
       this.success = true
@@ -173,6 +196,15 @@ export default {
         id: doc.id,
         name: doc.data().name,
         location: doc.data().location
+      }))
+    },
+    async fetchProductCategories() {
+      const productCategoriesCollection = collection(db, 'product_categories')
+      const productCategoriesSnapshot = await getDocs(productCategoriesCollection)
+
+      this.productCategories = productCategoriesSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        name: doc.data().name
       }))
     }
   }

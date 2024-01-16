@@ -19,13 +19,11 @@
       <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
         <ul class="col-6 navbar-nav justify-content-evenly fw-light">
           <li class="nav-item">
-            <RouterLink to="/categories" active-class="fw-bold" class="nav-link text-white"
-              >Categories</RouterLink
-            >
+            <RouterLink to="/" active-class="fw-bold" class="nav-link text-white">Home</RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink to="/offers" active-class="fw-bold" class="nav-link text-white"
-              >Offers</RouterLink
+            <RouterLink to="/categories" active-class="fw-bold" class="nav-link text-white"
+              >Categories</RouterLink
             >
           </li>
           <li class="nav-item">

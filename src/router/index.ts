@@ -10,11 +10,6 @@ const routes = [
     component: loadView('HomeView')
   },
   {
-    path: '/offers',
-    name: 'offers',
-    component: loadView('HomeView')
-  },
-  {
     path: '/account',
     name: 'account',
     component: loadView('AccountView')
