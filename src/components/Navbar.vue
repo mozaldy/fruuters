@@ -32,11 +32,6 @@
             >
           </li>
           <li class="nav-item">
-            <RouterLink to="/contact" active-class="fw-bold" class="nav-link text-white"
-              >Contact</RouterLink
-            >
-          </li>
-          <li class="nav-item">
             <RouterLink to="/about" active-class="fw-bold" class="nav-link text-white"
               >About</RouterLink
             >

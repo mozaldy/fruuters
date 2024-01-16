@@ -33,8 +33,7 @@
 </template>
 
 <script>
-import { addToCartState } from './Cart.js'
-import { useRouter } from 'vue-router'
+import { addToCartState } from '../data/Cart.ts'
 export default {
   props: {
     productData: {
