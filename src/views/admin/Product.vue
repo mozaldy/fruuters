@@ -1,6 +1,7 @@
 <template>
   <div>
     <Hero text1="All Products" />
+    <AdminNav />
     <main class="container mt-5">
       <RouterLink to="addproduct" class="h5 text-primary mb-5"> Add Product </RouterLink>
       <ul class="mt-5 list-group rounded-5">
@@ -31,11 +32,13 @@ import { useCollection } from 'vuefire'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { productRef } from '../../firebase'
 import { RouterLink } from 'vue-router'
+import AdminNav from './AdminNav.vue'
 
 export default {
   components: {
     RouterLink,
-    Hero
+    Hero,
+    AdminNav
   },
   data() {
     return {

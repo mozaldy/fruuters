@@ -52,7 +52,22 @@ const routes = [
   {
     path: '/admin/product',
     name: 'admin_product',
-    component: () => import('../views/admin/ManageProduct.vue')
+    component: () => import('../views/admin/Product.vue')
+  },
+  {
+    path: '/admin/addproducer/',
+    name: 'addproducer',
+    component: () => import('../views/admin/SetProducer.vue')
+  },
+  {
+    path: '/admin/editproducers/:producerId',
+    name: 'editproducer',
+    component: () => import('../views/admin/SetProducer.vue')
+  },
+  {
+    path: '/admin/producer',
+    name: 'admin_producer',
+    component: () => import('../views/admin/Producer.vue')
   }
 ]
 
